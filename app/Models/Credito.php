@@ -14,4 +14,6 @@ class Credito extends Model
         'id_user',
         'saldo'
     ];
+
+    public $timestamps = false;
 }

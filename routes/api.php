@@ -2,14 +2,13 @@
 
 use Illuminate\Http\Request;
 
-// Route::resource('credito', 'Api\CreditoApiController',['only'=>['index','show','update']]);
+Route::post('login','AuthController@login');
+Route::get('me','AuthController@me');
+Route::post('login-refresh','AuthController@refresh');
+Route::post('logout', 'AuthController@logout');
 
-Route::get('credito', "Api\CreditoApiController@index");
-Route::get('credito/{id}', "Api\CreditoApiController@show");
-Route::patch('credito/{credito}', "Api\CreditoApiController@update");
 
+Route::group(['namespace'=>'Api','middleware'=>'auth:api'],function(){
+    Route::resource('credito', 'CreditoApiController',['only'=>['index','show','update']]);
+});
 
-Route::get('users', "UsersController@index");
-Route::post('users', "UsersController@store");
-Route::patch('users/{user}', "UsersController@update");
-Route::delete('users/{user}', "UsersController@remove");
